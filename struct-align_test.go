@@ -11,16 +11,16 @@ import (
 
 type BadStructAlign struct {
 	IsActive bool   // 1 bytes
-	Name     string // Pointer size
+	Name     string // 2 * Pointer size
 	Age      uint16 // 2 bytes
-	Number   int8   //1 bytes
+	Number   int8   // 1 bytes
 }
 
 type GoodStructAlign struct {
-	Name     string // Pointer size
+	Name     string // 2 * Pointer size
 	Age      uint16 // 2 bytes
-	Number   int8   //1 bytes
-	IsActive bool   //1 bytes
+	Number   int8   // 1 bytes
+	IsActive bool   // 1 bytes
 }
 
 func BenchmarkGoodStructAlign(b *testing.B) {

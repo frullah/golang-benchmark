@@ -27,7 +27,7 @@ func BenchmarkCallClosure(b *testing.B) {
 	}
 }
 
-func BenchmarkDirect(b *testing.B) {
+func BenchmarkCallFunction(b *testing.B) {
 	arg1 := "arg1 value"
 	arg2 := "arg2 value"
 	for i := 0; i < b.N; i++ {

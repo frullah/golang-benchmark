@@ -3,7 +3,7 @@
 ### Function call (func_test.go)
 ```
 BenchmarkCallClosure-12         50000000                39.3 ns/op
-BenchmarkCallFunction-12              100000000               17.2 ns/op
+BenchmarkCallFunction-12        100000000               17.2 ns/op
 ```
 
 ### Struct memory alignment (struct-align_test.go)

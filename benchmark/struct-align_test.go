@@ -3,24 +3,58 @@
 //
 // To check struct memory alignment,
 // You can use the tools in http://golang-sizeof.tips
-package golangbenchmark
+package benchmark
 
 import (
+	"fmt"
 	"testing"
+	"unsafe"
+
+	"github.com/DATA-DOG/go-sqlmock"
+	"github.com/jinzhu/gorm"
 )
 
 type BadStructAlign struct {
 	IsActive bool   // 1 bytes
-	Name     string // 2 * Pointer size
+	Name     string // Pointer size
 	Age      uint16 // 2 bytes
-	Number   int8   // 1 bytes
+	Number   int8   //1 bytes
 }
 
 type GoodStructAlign struct {
-	Name     string // 2 * Pointer size
+	Name     string // Pointer size
 	Age      uint16 // 2 bytes
-	Number   int8   // 1 bytes
-	IsActive bool   // 1 bytes
+	Number   int8   //1 bytes
+	IsActive bool   //1 bytes
+}
+
+func TestAny(t *testing.T) {
+	var x struct {
+		Field1 map[string]string
+		Field2 []string
+	}
+	fmt.Println(unsafe.Sizeof(x))
+}
+
+func BenchmarkMock1(b *testing.B) {
+	type User struct {
+		ID int `json:"id"`
+	}
+
+	for i := 0; i < b.N; i++ {
+		db, sqlMock := createMock()
+		sqlMock.ExpectExec("INSERT INTO .+").
+			WillReturnResult(sqlmock.NewResult(1, 1))
+		db.Create(&User{})
+	}
+}
+
+// CreateMock - create gorm db connection mock
+func createMock() (*gorm.DB, sqlmock.Sqlmock) {
+	mockedDB, sqlMock, _ := sqlmock.New()
+	dbMock, _ := gorm.Open("sqlite3", mockedDB)
+
+	return dbMock, sqlMock
 }
 
 func BenchmarkGoodStructAlign(b *testing.B) {

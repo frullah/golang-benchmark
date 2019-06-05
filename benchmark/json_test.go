@@ -1,4 +1,4 @@
-package golangbenchmark
+package benchmark
 
 import (
 	"encoding/json"

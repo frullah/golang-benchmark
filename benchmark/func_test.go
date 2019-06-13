@@ -6,10 +6,11 @@ import (
 
 type EmptyStruct struct{}
 
+var noopClosure = noop
+
 func BenchmarkFunction_closureCall(b *testing.B) {
-	closure := noop
 	for i := 0; i < b.N; i++ {
-		closure()
+		noopClosure()
 	}
 }
 

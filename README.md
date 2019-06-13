@@ -22,7 +22,7 @@ BenchmarkGoodStructAlign-12     100000000               15.1 ns/op            24
 BenchmarkBadStructAlign-12      100000000               18.4 ns/op            32 B/op          0 allocs/op
 ```
 
-### JSON [[func_test.go](benchmark/json_test.go)]
+### JSON [[json_test.go](benchmark/json_test.go)]
 ```
 BenchmarkJSONEncode_fromStruct-12                5000000               261 ns/op              48 B/op          1 allocs/op
 BenchmarkJSONDeDecode_toStruct-12                2000000               866 ns/op             256 B/op          5 allocs/op
@@ -30,7 +30,7 @@ BenchmarkJSONEncode_fromMap-12                   2000000               989 ns/op
 BenchmarkJSONDeDecode_toMap-12                   1000000              1408 ns/op             424 B/op         15 allocs/op
 ```
 
-### JSON with jsoniter library [[func_test.go](benchmark/jsoniter_test.go)]
+### JSON with jsoniter library [[jsoniter_test.go](benchmark/jsoniter_test.go)]
 ```
 BenchmarkJSONIterEncode_fromStruct-12            5000000               258 ns/op              56 B/op          2 allocs/op
 BenchmarkJSONIterDeDecode_toStruct-12            5000000               282 ns/op              80 B/op          3 allocs/op
